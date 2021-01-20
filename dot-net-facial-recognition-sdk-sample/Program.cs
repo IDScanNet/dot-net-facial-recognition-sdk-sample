@@ -12,16 +12,17 @@ namespace dot_net_facial_recognition_sdk_sample
             Console.WriteLine("Hello World!");
 
             // path to directory containing SDK data files
-            var dataDirectoryPath = Path.Combine(@"C:\ProgramData", "IDScan.net", "IDScanNet.Faces.SDK.Data");
+            var sdkDirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "IDScan.net", "IDScanNet.Faces.SDK.Data");
 
             // path to license file
             var licenseFilePath = Path.Combine("idscannet.facesdk.license");
 
             var settings = new Settings
             {
-                SdkDataDirectoryPath = dataDirectoryPath,
+                SdkDataDirectoryPath = sdkDirectoryPath,
                 // this is a temporary dummy license
-                License = new byte[] { 1 } 
+                License = File.ReadAllBytes(licenseFilePath)
             };
 
             // create and initialize face service
